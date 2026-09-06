@@ -1,0 +1,162 @@
+html,
+body {
+    margin: 0;
+    width: 100%;
+    min-height: 100%;
+
+    background: #11152b;
+
+    overflow: hidden;
+}
+
+
+body {
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* ====================
+   ИГРОВОЕ ПОЛЕ
+   ==================== */
+
+#game {
+    width: min(800px, 96vw);
+    height: auto;
+
+    aspect-ratio: 800 / 500;
+
+    position: relative;
+
+    background-image: url("background.png");
+    background-size: cover;
+    background-position: center;
+
+    overflow: hidden;
+
+    flex-shrink: 0;
+}
+
+
+/* ====================
+   УПРАВЛЕНИЕ
+   ==================== */
+
+#controls {
+    margin-top: 15px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    user-select: none;
+    -webkit-user-select: none;
+
+    touch-action: manipulation;
+}
+
+
+/* ====================
+   КНОПКИ
+   ==================== */
+
+#controls button {
+    width: 70px;
+    height: 55px;
+
+    padding: 0;
+
+    border: none;
+    border-radius: 12px;
+
+    background: #202020;
+    color: white;
+
+    font-size: 30px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+
+    -webkit-tap-highlight-color: transparent;
+
+    touch-action: manipulation;
+}
+
+
+/* ====================
+   СРЕДНИЕ КНОПКИ
+   ==================== */
+
+#middleControls {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+/* ====================
+   ЦЕНТРАЛЬНАЯ КНОПКА
+   ==================== */
+
+#centerButton {
+    width: 55px;
+    height: 55px;
+
+    border-radius: 50%;
+
+    background: #202020;
+    color: #777;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 18px;
+}
+
+
+/* ====================
+   НАЖАТИЕ
+   ==================== */
+
+#controls button:active {
+    transform: scale(0.92);
+}
+
+
+/* ====================
+   МАЛЕНЬКИЕ ЭКРАНЫ
+   ==================== */
+
+@media (max-width: 500px) {
+
+    #game {
+        width: 96vw;
+    }
+
+    #controls {
+        margin-top: 10px;
+    }
+
+    #controls button {
+        width: 65px;
+        height: 52px;
+
+        font-size: 27px;
+    }
+
+    #centerButton {
+        width: 52px;
+        height: 52px;
+    }
+}
