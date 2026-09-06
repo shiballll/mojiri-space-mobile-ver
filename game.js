@@ -865,3 +865,4 @@ player.style.top =
 
 gameLoop();
 ```
+alert("НОВЫЙ GAME.JS ЗАПУЩЕН!");
