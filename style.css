@@ -22,14 +22,12 @@ body {
 
 
 /* ====================
-   ИГРОВОЕ ПОЛЕ
+   ОБЛАСТЬ ИГРЫ
    ==================== */
 
 #game {
-    width: min(800px, 96vw);
-    height: auto;
-
-    aspect-ratio: 800 / 500;
+    width: 800px;
+    height: 500px;
 
     position: relative;
 
@@ -40,6 +38,8 @@ body {
     overflow: hidden;
 
     flex-shrink: 0;
+
+    transform-origin: center center;
 }
 
 
@@ -139,10 +139,6 @@ body {
    ==================== */
 
 @media (max-width: 500px) {
-
-    #game {
-        width: 96vw;
-    }
 
     #controls {
         margin-top: 10px;
