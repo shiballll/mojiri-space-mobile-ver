@@ -1,3 +1,4 @@
+```javascript
 const game = document.getElementById("game");
 
 const music = new Audio("music.mp3");
@@ -5,6 +6,39 @@ music.loop = true;
 
 console.log("Путь к музыке:", music.src);
 console.log("Ошибка аудио:", music.error);
+
+
+// ====================
+// НАСТРОЙКА МАСШТАБА
+// ====================
+
+function resizeGame() {
+
+    const controlsSpace = 180;
+
+    const scaleByWidth =
+        (window.innerWidth * 0.96) / 800;
+
+    const scaleByHeight =
+        (window.innerHeight - controlsSpace) / 500;
+
+    const scale =
+        Math.min(1, scaleByWidth, scaleByHeight);
+
+    game.style.transform =
+        `scale(${scale})`;
+
+    // Компенсируем место, которое занимает
+    // немасштабированное поле в разметке
+    game.style.marginBottom =
+        -(500 * (1 - scale)) + "px";
+}
+
+
+window.addEventListener("resize", resizeGame);
+
+resizeGame();
+
 
 let x = 380;
 let y = 230;
@@ -59,9 +93,12 @@ const startPanel = document.createElement("div");
 startPanel.style.position = "absolute";
 startPanel.style.top = "50%";
 startPanel.style.left = "50%";
-startPanel.style.transform = "translate(-50%, -50%)";
+
+startPanel.style.transform =
+    "translate(-50%, -50%)";
 
 startPanel.style.background = "#202020";
+
 startPanel.style.padding = "35px 60px";
 
 startPanel.style.borderRadius = "15px";
@@ -104,14 +141,17 @@ const playButton = document.createElement("button");
 playButton.textContent = "PLAY";
 
 playButton.style.fontSize = "25px";
-playButton.style.padding = "10px 35px";
+
+playButton.style.padding =
+    "10px 35px";
+
 playButton.style.cursor = "pointer";
 
 startPanel.appendChild(playButton);
 
 
 // ====================
-// УПРАВЛЕНИЕ КЛАВИАТУРОЙ
+// СМЕНА НАПРАВЛЕНИЯ
 // ====================
 
 function changeDirection(newDirection) {
@@ -204,10 +244,17 @@ document.addEventListener("keydown", (event) => {
 // СЕНСОРНЫЕ КНОПКИ
 // ====================
 
-const upButton = document.getElementById("upButton");
-const downButton = document.getElementById("downButton");
-const leftButton = document.getElementById("leftButton");
-const rightButton = document.getElementById("rightButton");
+const upButton =
+    document.getElementById("upButton");
+
+const downButton =
+    document.getElementById("downButton");
+
+const leftButton =
+    document.getElementById("leftButton");
+
+const rightButton =
+    document.getElementById("rightButton");
 
 
 upButton.addEventListener("pointerdown", (event) => {
@@ -276,12 +323,14 @@ game.appendChild(scoreText);
 
 function createCookie() {
 
-    const cookie = document.createElement("div");
+    const cookie =
+        document.createElement("div");
 
     cookie.style.width = "40px";
     cookie.style.height = "40px";
 
-    cookie.style.backgroundImage = 'url("cookie.png")';
+    cookie.style.backgroundImage =
+        'url("cookie.png")';
 
     cookie.style.backgroundSize = "contain";
     cookie.style.backgroundRepeat = "no-repeat";
@@ -289,8 +338,11 @@ function createCookie() {
 
     cookie.style.position = "absolute";
 
-    cookie.style.left = Math.random() * 760 + "px";
-    cookie.style.top = Math.random() * 460 + "px";
+    cookie.style.left =
+        Math.random() * 760 + "px";
+
+    cookie.style.top =
+        Math.random() * 460 + "px";
 
     cookie.style.zIndex = "1";
 
@@ -299,6 +351,7 @@ function createCookie() {
     return cookie;
 }
 
+
 let cookie = createCookie();
 
 
@@ -306,18 +359,21 @@ let cookie = createCookie();
 // GAME OVER ПАНЕЛЬ
 // ====================
 
-const gameOverPanel = document.createElement("div");
+const gameOverPanel =
+    document.createElement("div");
 
 gameOverPanel.style.position = "absolute";
 
 gameOverPanel.style.top = "50%";
 gameOverPanel.style.left = "50%";
 
-gameOverPanel.style.transform = "translate(-50%, -50%)";
+gameOverPanel.style.transform =
+    "translate(-50%, -50%)";
 
 gameOverPanel.style.background = "#202020";
 
-gameOverPanel.style.padding = "35px 60px";
+gameOverPanel.style.padding =
+    "35px 60px";
 
 gameOverPanel.style.borderRadius = "15px";
 
@@ -336,9 +392,11 @@ game.appendChild(gameOverPanel);
 // GAME OVER ТЕКСТ
 // ====================
 
-const gameOverText = document.createElement("div");
+const gameOverText =
+    document.createElement("div");
 
-gameOverText.textContent = "GAME OVER";
+gameOverText.textContent =
+    "GAME OVER";
 
 gameOverText.style.color = "white";
 
@@ -359,9 +417,11 @@ gameOverPanel.appendChild(gameOverText);
 // ФИНАЛЬНЫЙ СЧЁТ
 // ====================
 
-const gameOverScoreText = document.createElement("div");
+const gameOverScoreText =
+    document.createElement("div");
 
-gameOverScoreText.textContent = "SCORE: 0";
+gameOverScoreText.textContent =
+    "SCORE: 0";
 
 gameOverScoreText.style.color = "white";
 
@@ -373,24 +433,32 @@ gameOverScoreText.style.marginBottom = "25px";
 
 gameOverScoreText.style.whiteSpace = "nowrap";
 
-gameOverPanel.appendChild(gameOverScoreText);
+gameOverPanel.appendChild(
+    gameOverScoreText
+);
 
 
 // ====================
 // RESTART
 // ====================
 
-const restartButton = document.createElement("button");
+const restartButton =
+    document.createElement("button");
 
-restartButton.textContent = "RESTART";
+restartButton.textContent =
+    "RESTART";
 
 restartButton.style.fontSize = "20px";
 
-restartButton.style.padding = "10px 25px";
+restartButton.style.padding =
+    "10px 25px";
 
-restartButton.style.cursor = "pointer";
+restartButton.style.cursor =
+    "pointer";
 
-gameOverPanel.appendChild(restartButton);
+gameOverPanel.appendChild(
+    restartButton
+);
 
 
 // ====================
@@ -399,18 +467,26 @@ gameOverPanel.appendChild(restartButton);
 
 function addBodySegment() {
 
-    const segment = document.createElement("div");
+    const segment =
+        document.createElement("div");
 
     segment.style.width = "40px";
     segment.style.height = "40px";
 
-    segment.style.backgroundImage = 'url("eye.png")';
+    segment.style.backgroundImage =
+        'url("eye.png")';
 
-    segment.style.backgroundSize = "contain";
-    segment.style.backgroundRepeat = "no-repeat";
-    segment.style.backgroundPosition = "center";
+    segment.style.backgroundSize =
+        "contain";
 
-    segment.style.position = "absolute";
+    segment.style.backgroundRepeat =
+        "no-repeat";
+
+    segment.style.backgroundPosition =
+        "center";
+
+    segment.style.position =
+        "absolute";
 
     segment.style.zIndex = "2";
 
@@ -430,15 +506,22 @@ playButton.addEventListener("click", () => {
 
     gameStarted = true;
 
+    gameOver = false;
+
     music.currentTime = 0;
 
     music.play().then(() => {
 
-        console.log("МУЗЫКА ЗАПУСТИЛАСЬ!");
+        console.log(
+            "МУЗЫКА ЗАПУСТИЛАСЬ!"
+        );
 
     }).catch((error) => {
 
-        console.log("ОШИБКА МУЗЫКИ:", error);
+        console.log(
+            "ОШИБКА МУЗЫКИ:",
+            error
+        );
 
     });
 
@@ -457,11 +540,14 @@ function showGameOver() {
 
     music.pause();
 
-    player.style.backgroundImage = 'url("gameover.png")';
+    player.style.backgroundImage =
+        'url("gameover.png")';
 
-    gameOverScoreText.textContent = "SCORE: " + score;
+    gameOverScoreText.textContent =
+        "SCORE: " + score;
 
-    gameOverPanel.style.display = "block";
+    gameOverPanel.style.display =
+        "block";
 }
 
 
@@ -473,7 +559,9 @@ function gameLoop() {
 
     if (!gameStarted) {
 
-        requestAnimationFrame(gameLoop);
+        requestAnimationFrame(
+            gameLoop
+        );
 
         return;
     }
@@ -481,7 +569,9 @@ function gameLoop() {
 
     if (gameOver) {
 
-        requestAnimationFrame(gameLoop);
+        requestAnimationFrame(
+            gameLoop
+        );
 
         return;
     }
@@ -508,8 +598,11 @@ function gameLoop() {
     }
 
 
-    player.style.left = x + "px";
-    player.style.top = y + "px";
+    player.style.left =
+        x + "px";
+
+    player.style.top =
+        y + "px";
 
 
     // ====================
@@ -526,17 +619,30 @@ function gameLoop() {
     // ДВИЖЕНИЕ ТЕЛА
     // ====================
 
-    for (let i = 0; i < body.length; i++) {
+    for (
+        let i = 0;
+        i < body.length;
+        i++
+    ) {
 
-        const historyIndex = (i + 1) * 20;
+        const historyIndex =
+            (i + 1) * 20;
 
-        if (positionHistory[historyIndex]) {
+        if (
+            positionHistory[
+                historyIndex
+            ]
+        ) {
 
             body[i].style.left =
-                positionHistory[historyIndex].x + 5 + "px";
+                positionHistory[
+                    historyIndex
+                ].x + 5 + "px";
 
             body[i].style.top =
-                positionHistory[historyIndex].y + 5 + "px";
+                positionHistory[
+                    historyIndex
+                ].y + 5 + "px";
 
         }
 
@@ -547,11 +653,16 @@ function gameLoop() {
     // ИСТОРИЯ
     // ====================
 
-    const maxHistory = (body.length + 2) * 20;
+    const maxHistory =
+        (body.length + 2) * 20;
 
-    if (positionHistory.length > maxHistory) {
+    if (
+        positionHistory.length >
+        maxHistory
+    ) {
 
-        positionHistory.length = maxHistory;
+        positionHistory.length =
+            maxHistory;
 
     }
 
@@ -560,11 +671,16 @@ function gameLoop() {
     // СТЕНЫ
     // ====================
 
+    // ВАЖНО:
+    // Игровое поле ВСЕГДА 800×500.
+    // На телефоне оно только визуально
+    // уменьшается через transform.
+
     if (
         x < 0 ||
         y < 0 ||
-        x + 50 > game.clientWidth ||
-        y + 50 > game.clientHeight
+        x + 50 > 800 ||
+        y + 50 > 500
     ) {
 
         showGameOver();
@@ -576,17 +692,30 @@ function gameLoop() {
     // СТОЛКНОВЕНИЕ С ТЕЛОМ
     // ====================
 
-    const headRect = player.getBoundingClientRect();
+    const headRect =
+        player.getBoundingClientRect();
 
-    for (let i = 2; i < body.length; i++) {
+    for (
+        let i = 2;
+        i < body.length;
+        i++
+    ) {
 
-        const bodyRect = body[i].getBoundingClientRect();
+        const bodyRect =
+            body[i].getBoundingClientRect();
 
         if (
-            headRect.left < bodyRect.right &&
-            headRect.right > bodyRect.left &&
-            headRect.top < bodyRect.bottom &&
-            headRect.bottom > bodyRect.top
+            headRect.left <
+                bodyRect.right &&
+
+            headRect.right >
+                bodyRect.left &&
+
+            headRect.top <
+                bodyRect.bottom &&
+
+            headRect.bottom >
+                bodyRect.top
         ) {
 
             showGameOver();
@@ -601,22 +730,32 @@ function gameLoop() {
     // ПЕЧЕНЬКА
     // ====================
 
-    const playerRect = player.getBoundingClientRect();
+    const playerRect =
+        player.getBoundingClientRect();
 
-    const cookieRect = cookie.getBoundingClientRect();
+    const cookieRect =
+        cookie.getBoundingClientRect();
 
     if (
-        playerRect.left < cookieRect.right &&
-        playerRect.right > cookieRect.left &&
-        playerRect.top < cookieRect.bottom &&
-        playerRect.bottom > cookieRect.top
+        playerRect.left <
+            cookieRect.right &&
+
+        playerRect.right >
+            cookieRect.left &&
+
+        playerRect.top <
+            cookieRect.bottom &&
+
+        playerRect.bottom >
+            cookieRect.top
     ) {
 
         cookie.remove();
 
         score++;
 
-        scoreText.textContent = "SCORE: " + score;
+        scoreText.textContent =
+            "SCORE: " + score;
 
         addBodySegment();
 
@@ -627,7 +766,8 @@ function gameLoop() {
         // EAT PNG
         // ====================
 
-        player.style.backgroundImage = 'url("eat.png")';
+        player.style.backgroundImage =
+            'url("eat.png")';
 
         clearTimeout(eatTimer);
 
@@ -649,14 +789,21 @@ function gameLoop() {
     // СТАРЫЕ СЕГМЕНТЫ
     // ====================
 
-    for (let i = 0; i < body.length; i++) {
+    for (
+        let i = 0;
+        i < body.length;
+        i++
+    ) {
 
-        body[i].dataset.new = "false";
+        body[i].dataset.new =
+            "false";
 
     }
 
 
-    requestAnimationFrame(gameLoop);
+    requestAnimationFrame(
+        gameLoop
+    );
 }
 
 
@@ -664,73 +811,101 @@ function gameLoop() {
 // RESTART
 // ====================
 
-restartButton.addEventListener("click", () => {
+restartButton.addEventListener(
+    "click",
+    () => {
 
-    x = 380;
-    y = 230;
+        x = 380;
+        y = 230;
 
-    direction = "right";
+        direction = "right";
 
-    gameOver = false;
+        gameOver = false;
 
-
-    clearTimeout(eatTimer);
-
-    player.style.backgroundImage =
-        'url("normal.png")';
+        gameStarted = true;
 
 
-    music.currentTime = 0;
+        // ====================
+        // СБРАСЫВАЕМ EAT
+        // ====================
 
-    music.play();
+        clearTimeout(eatTimer);
 
-
-    score = 0;
-
-    scoreText.textContent = "SCORE: 0";
-
-    gameOverScoreText.textContent = "SCORE: 0";
+        player.style.backgroundImage =
+            'url("normal.png")';
 
 
-    // ====================
-    // УДАЛЯЕМ ТЕЛО
-    // ====================
+        // ====================
+        // МУЗЫКА С НАЧАЛА
+        // ====================
 
-    for (let i = 0; i < body.length; i++) {
+        music.currentTime = 0;
 
-        body[i].remove();
+        music.play();
+
+
+        // ====================
+        // СБРАСЫВАЕМ СЧЁТ
+        // ====================
+
+        score = 0;
+
+        scoreText.textContent =
+            "SCORE: 0";
+
+        gameOverScoreText.textContent =
+            "SCORE: 0";
+
+
+        // ====================
+        // УДАЛЯЕМ ТЕЛО
+        // ====================
+
+        for (
+            let i = 0;
+            i < body.length;
+            i++
+        ) {
+
+            body[i].remove();
+
+        }
+
+        body.length = 0;
+
+        positionHistory.length = 0;
+
+
+        // ====================
+        // ВОЗВРАЩАЕМ ИГРОКА
+        // ====================
+
+        player.style.left =
+            x + "px";
+
+        player.style.top =
+            y + "px";
+
+
+        // ====================
+        // СКРЫВАЕМ GAME OVER
+        // ====================
+
+        gameOverPanel.style.display =
+            "none";
+
+
+        // ====================
+        // НОВАЯ ПЕЧЕНЬКА
+        // ====================
+
+        cookie.remove();
+
+        cookie = createCookie();
 
     }
-
-    body.length = 0;
-
-    positionHistory.length = 0;
-
-
-    // ====================
-    // ВОЗВРАЩАЕМ ИГРОКА
-    // ====================
-
-    player.style.left = x + "px";
-    player.style.top = y + "px";
-
-
-    // ====================
-    // СКРЫВАЕМ GAME OVER
-    // ====================
-
-    gameOverPanel.style.display = "none";
-
-
-    // ====================
-    // НОВАЯ ПЕЧЕНЬКА
-    // ====================
-
-    cookie.remove();
-
-    cookie = createCookie();
-
-});
+);
 
 
 gameLoop();
+```
