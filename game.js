@@ -6,34 +6,8 @@ music.loop = true;
 
 
 // ====================
-// НАСТРОЙКА МАСШТАБА
+// ИГРОК
 // ====================
-
-function resizeGame() {
-
-    const controlsSpace = 180;
-
-    const scaleByWidth =
-        (window.innerWidth * 0.96) / 800;
-
-    const scaleByHeight =
-        (window.innerHeight - controlsSpace) / 500;
-
-    const scale =
-        Math.min(1, scaleByWidth, scaleByHeight);
-
-    game.style.transform =
-        `scale(${scale})`;
-
-    game.style.marginBottom =
-        -(500 * (1 - scale)) + "px";
-}
-
-
-window.addEventListener("resize", resizeGame);
-
-resizeGame();
-
 
 let x = 380;
 let y = 230;
@@ -41,7 +15,6 @@ let y = 230;
 const speed = 3;
 
 let direction = "right";
-
 let gameOver = false;
 let gameStarted = false;
 
@@ -51,7 +24,7 @@ let eatTimer;
 
 
 // ====================
-// ИГРОК
+// СОЗДАНИЕ ИГРОКА
 // ====================
 
 const player = document.createElement("div");
@@ -59,21 +32,12 @@ const player = document.createElement("div");
 player.style.width = "50px";
 player.style.height = "50px";
 
-player.style.backgroundImage =
-    'url("normal.png")';
+player.style.backgroundImage = 'url("normal.png")';
+player.style.backgroundSize = "contain";
+player.style.backgroundRepeat = "no-repeat";
+player.style.backgroundPosition = "center";
 
-player.style.backgroundSize =
-    "contain";
-
-player.style.backgroundRepeat =
-    "no-repeat";
-
-player.style.backgroundPosition =
-    "center";
-
-player.style.position =
-    "absolute";
-
+player.style.position = "absolute";
 player.style.zIndex = "2";
 
 game.appendChild(player);
@@ -84,7 +48,6 @@ game.appendChild(player);
 // ====================
 
 const body = [];
-
 const positionHistory = [];
 
 
@@ -92,38 +55,26 @@ const positionHistory = [];
 // ГЛАВНОЕ МЕНЮ
 // ====================
 
-const startPanel =
-    document.createElement("div");
+const startPanel = document.createElement("div");
 
-startPanel.style.position =
-    "absolute";
-
-startPanel.style.top =
-    "50%";
-
-startPanel.style.left =
-    "50%";
+startPanel.style.position = "absolute";
+startPanel.style.top = "50%";
+startPanel.style.left = "50%";
 
 startPanel.style.transform =
     "translate(-50%, -50%)";
 
-startPanel.style.background =
-    "#202020";
+startPanel.style.background = "#202020";
 
-startPanel.style.padding =
-    "35px 60px";
+startPanel.style.padding = "35px 60px";
 
-startPanel.style.borderRadius =
-    "15px";
+startPanel.style.borderRadius = "15px";
 
-startPanel.style.textAlign =
-    "center";
+startPanel.style.textAlign = "center";
 
-startPanel.style.boxSizing =
-    "border-box";
+startPanel.style.boxSizing = "border-box";
 
-startPanel.style.zIndex =
-    "10";
+startPanel.style.zIndex = "10";
 
 game.appendChild(startPanel);
 
@@ -132,29 +83,18 @@ game.appendChild(startPanel);
 // НАЗВАНИЕ
 // ====================
 
-const gameTitle =
-    document.createElement("div");
+const gameTitle = document.createElement("div");
 
-gameTitle.textContent =
-    "MOJIRI SPACE";
+gameTitle.textContent = "MOJIRI SPACE";
 
-gameTitle.style.color =
-    "white";
+gameTitle.style.color = "white";
+gameTitle.style.fontSize = "40px";
+gameTitle.style.fontFamily = "Arial";
+gameTitle.style.fontWeight = "bold";
 
-gameTitle.style.fontSize =
-    "40px";
+gameTitle.style.marginBottom = "25px";
 
-gameTitle.style.fontFamily =
-    "Arial";
-
-gameTitle.style.fontWeight =
-    "bold";
-
-gameTitle.style.marginBottom =
-    "25px";
-
-gameTitle.style.whiteSpace =
-    "nowrap";
+gameTitle.style.whiteSpace = "nowrap";
 
 startPanel.appendChild(gameTitle);
 
@@ -163,14 +103,11 @@ startPanel.appendChild(gameTitle);
 // PLAY
 // ====================
 
-const playButton =
-    document.createElement("button");
+const playButton = document.createElement("button");
 
-playButton.textContent =
-    "PLAY";
+playButton.textContent = "PLAY";
 
-playButton.style.fontSize =
-    "25px";
+playButton.style.fontSize = "25px";
 
 playButton.style.padding =
     "10px 35px";
@@ -191,7 +128,6 @@ function changeDirection(newDirection) {
         return;
     }
 
-
     if (direction === "up") {
 
         if (newDirection === "left") {
@@ -203,7 +139,6 @@ function changeDirection(newDirection) {
         }
 
     }
-
 
     if (direction === "down") {
 
@@ -217,7 +152,6 @@ function changeDirection(newDirection) {
 
     }
 
-
     if (direction === "left") {
 
         if (newDirection === "up") {
@@ -229,7 +163,6 @@ function changeDirection(newDirection) {
         }
 
     }
-
 
     if (direction === "right") {
 
@@ -250,43 +183,25 @@ function changeDirection(newDirection) {
 // КЛАВИАТУРА
 // ====================
 
-document.addEventListener(
-    "keydown",
-    (event) => {
+document.addEventListener("keydown", (event) => {
 
-        if (
-            event.key === "ArrowUp" ||
-            event.key === "w"
-        ) {
-            changeDirection("up");
-        }
-
-
-        if (
-            event.key === "ArrowDown" ||
-            event.key === "s"
-        ) {
-            changeDirection("down");
-        }
-
-
-        if (
-            event.key === "ArrowLeft" ||
-            event.key === "a"
-        ) {
-            changeDirection("left");
-        }
-
-
-        if (
-            event.key === "ArrowRight" ||
-            event.key === "d"
-        ) {
-            changeDirection("right");
-        }
-
+    if (event.key === "ArrowUp" || event.key === "w") {
+        changeDirection("up");
     }
-);
+
+    if (event.key === "ArrowDown" || event.key === "s") {
+        changeDirection("down");
+    }
+
+    if (event.key === "ArrowLeft" || event.key === "a") {
+        changeDirection("left");
+    }
+
+    if (event.key === "ArrowRight" || event.key === "d") {
+        changeDirection("right");
+    }
+
+});
 
 
 // ====================
@@ -306,84 +221,62 @@ const rightButton =
     document.getElementById("rightButton");
 
 
-upButton.addEventListener(
-    "pointerdown",
-    (event) => {
+upButton.addEventListener("pointerdown", (event) => {
 
-        event.preventDefault();
+    event.preventDefault();
 
-        changeDirection("up");
+    changeDirection("up");
 
-    }
-);
+});
 
 
-downButton.addEventListener(
-    "pointerdown",
-    (event) => {
+downButton.addEventListener("pointerdown", (event) => {
 
-        event.preventDefault();
+    event.preventDefault();
 
-        changeDirection("down");
+    changeDirection("down");
 
-    }
-);
+});
 
 
-leftButton.addEventListener(
-    "pointerdown",
-    (event) => {
+leftButton.addEventListener("pointerdown", (event) => {
 
-        event.preventDefault();
+    event.preventDefault();
 
-        changeDirection("left");
+    changeDirection("left");
 
-    }
-);
+});
 
 
-rightButton.addEventListener(
-    "pointerdown",
-    (event) => {
+rightButton.addEventListener("pointerdown", (event) => {
 
-        event.preventDefault();
+    event.preventDefault();
 
-        changeDirection("right");
+    changeDirection("right");
 
-    }
-);
+});
 
 
 // ====================
 // SCORE
 // ====================
 
-const scoreText =
-    document.createElement("div");
+const scoreText = document.createElement("div");
 
-scoreText.textContent =
-    "SCORE: 0";
+scoreText.textContent = "SCORE: 0";
 
-scoreText.style.position =
-    "absolute";
+scoreText.style.position = "absolute";
 
-scoreText.style.top =
-    "10px";
+scoreText.style.top = "10px";
+scoreText.style.left = "10px";
 
-scoreText.style.left =
-    "10px";
+scoreText.style.color = "white";
 
-scoreText.style.color =
-    "white";
+scoreText.style.fontSize = "20px";
 
-scoreText.style.fontSize =
-    "20px";
+scoreText.style.fontFamily = "Arial";
 
-scoreText.style.fontFamily =
-    "Arial";
-
-scoreText.style.zIndex =
-    "3";
+scoreText.style.zIndex = "3";
 
 game.appendChild(scoreText);
 
@@ -397,26 +290,17 @@ function createCookie() {
     const cookie =
         document.createElement("div");
 
-    cookie.style.width =
-        "40px";
-
-    cookie.style.height =
-        "40px";
+    cookie.style.width = "40px";
+    cookie.style.height = "40px";
 
     cookie.style.backgroundImage =
         'url("cookie.png")';
 
-    cookie.style.backgroundSize =
-        "contain";
+    cookie.style.backgroundSize = "contain";
+    cookie.style.backgroundRepeat = "no-repeat";
+    cookie.style.backgroundPosition = "center";
 
-    cookie.style.backgroundRepeat =
-        "no-repeat";
-
-    cookie.style.backgroundPosition =
-        "center";
-
-    cookie.style.position =
-        "absolute";
+    cookie.style.position = "absolute";
 
     cookie.style.left =
         Math.random() * 760 + "px";
@@ -424,8 +308,7 @@ function createCookie() {
     cookie.style.top =
         Math.random() * 460 + "px";
 
-    cookie.style.zIndex =
-        "1";
+    cookie.style.zIndex = "1";
 
     game.appendChild(cookie);
 
@@ -437,44 +320,34 @@ let cookie = createCookie();
 
 
 // ====================
-// GAME OVER ПАНЕЛЬ
+// GAME OVER PANEL
 // ====================
 
 const gameOverPanel =
     document.createElement("div");
 
-gameOverPanel.style.position =
-    "absolute";
+gameOverPanel.style.position = "absolute";
 
-gameOverPanel.style.top =
-    "50%";
-
-gameOverPanel.style.left =
-    "50%";
+gameOverPanel.style.top = "50%";
+gameOverPanel.style.left = "50%";
 
 gameOverPanel.style.transform =
     "translate(-50%, -50%)";
 
-gameOverPanel.style.background =
-    "#202020";
+gameOverPanel.style.background = "#202020";
 
 gameOverPanel.style.padding =
     "35px 60px";
 
-gameOverPanel.style.borderRadius =
-    "15px";
+gameOverPanel.style.borderRadius = "15px";
 
-gameOverPanel.style.textAlign =
-    "center";
+gameOverPanel.style.textAlign = "center";
 
-gameOverPanel.style.boxSizing =
-    "border-box";
+gameOverPanel.style.boxSizing = "border-box";
 
-gameOverPanel.style.display =
-    "none";
+gameOverPanel.style.display = "none";
 
-gameOverPanel.style.zIndex =
-    "10";
+gameOverPanel.style.zIndex = "10";
 
 game.appendChild(gameOverPanel);
 
@@ -489,27 +362,19 @@ const gameOverText =
 gameOverText.textContent =
     "GAME OVER";
 
-gameOverText.style.color =
-    "white";
+gameOverText.style.color = "white";
 
-gameOverText.style.fontSize =
-    "40px";
+gameOverText.style.fontSize = "40px";
 
-gameOverText.style.fontFamily =
-    "Arial";
+gameOverText.style.fontFamily = "Arial";
 
-gameOverText.style.fontWeight =
-    "bold";
+gameOverText.style.fontWeight = "bold";
 
-gameOverText.style.marginBottom =
-    "15px";
+gameOverText.style.marginBottom = "15px";
 
-gameOverText.style.whiteSpace =
-    "nowrap";
+gameOverText.style.whiteSpace = "nowrap";
 
-gameOverPanel.appendChild(
-    gameOverText
-);
+gameOverPanel.appendChild(gameOverText);
 
 
 // ====================
@@ -522,24 +387,17 @@ const gameOverScoreText =
 gameOverScoreText.textContent =
     "SCORE: 0";
 
-gameOverScoreText.style.color =
-    "white";
+gameOverScoreText.style.color = "white";
 
-gameOverScoreText.style.fontSize =
-    "25px";
+gameOverScoreText.style.fontSize = "25px";
 
-gameOverScoreText.style.fontFamily =
-    "Arial";
+gameOverScoreText.style.fontFamily = "Arial";
 
-gameOverScoreText.style.marginBottom =
-    "25px";
+gameOverScoreText.style.marginBottom = "25px";
 
-gameOverScoreText.style.whiteSpace =
-    "nowrap";
+gameOverScoreText.style.whiteSpace = "nowrap";
 
-gameOverPanel.appendChild(
-    gameOverScoreText
-);
+gameOverPanel.appendChild(gameOverScoreText);
 
 
 // ====================
@@ -617,19 +475,9 @@ playButton.addEventListener(
 
         gameOver = false;
 
-        startPanel.style.display =
-            "none";
-
-
         music.currentTime = 0;
 
-        music.play().then(() => {
-
-            console.log(
-                "МУЗЫКА ЗАПУСТИЛАСЬ!"
-            );
-
-        }).catch((error) => {
+        music.play().catch((error) => {
 
             console.log(
                 "ОШИБКА МУЗЫКИ:",
@@ -637,6 +485,9 @@ playButton.addEventListener(
             );
 
         });
+
+        startPanel.style.display =
+            "none";
 
     }
 );
@@ -647,10 +498,6 @@ playButton.addEventListener(
 // ====================
 
 function showGameOver() {
-
-    if (gameOver) {
-        return;
-    }
 
     gameOver = true;
 
@@ -668,7 +515,7 @@ function showGameOver() {
 
 
 // ====================
-// ПРОВЕРКА СТОЛКНОВЕНИЯ
+// СТОЛКНОВЕНИЕ
 // ====================
 
 function isColliding(
@@ -700,9 +547,7 @@ function gameLoop() {
 
     if (!gameStarted) {
 
-        requestAnimationFrame(
-            gameLoop
-        );
+        requestAnimationFrame(gameLoop);
 
         return;
     }
@@ -710,9 +555,7 @@ function gameLoop() {
 
     if (gameOver) {
 
-        requestAnimationFrame(
-            gameLoop
-        );
+        requestAnimationFrame(gameLoop);
 
         return;
     }
@@ -770,21 +613,14 @@ function gameLoop() {
             (i + 1) * 20;
 
         if (
-            positionHistory[
-                historyIndex
-            ]
+            positionHistory[historyIndex]
         ) {
 
             const bodyX =
-                positionHistory[
-                    historyIndex
-                ].x + 5;
+                positionHistory[historyIndex].x + 5;
 
             const bodyY =
-                positionHistory[
-                    historyIndex
-                ].y + 5;
-
+                positionHistory[historyIndex].y + 5;
 
             body[i].style.left =
                 bodyX + "px";
@@ -828,9 +664,7 @@ function gameLoop() {
 
         showGameOver();
 
-        requestAnimationFrame(
-            gameLoop
-        );
+        requestAnimationFrame(gameLoop);
 
         return;
     }
@@ -859,7 +693,6 @@ function gameLoop() {
                 y,
                 50,
                 50,
-
                 segmentX,
                 segmentY,
                 40,
@@ -869,9 +702,7 @@ function gameLoop() {
 
             showGameOver();
 
-            requestAnimationFrame(
-                gameLoop
-            );
+            requestAnimationFrame(gameLoop);
 
             return;
         }
@@ -880,7 +711,7 @@ function gameLoop() {
 
 
     // ====================
-    // СТОЛКНОВЕНИЕ С ПЕЧЕНЬКОЙ
+    // ПЕЧЕНЬКА
     // ====================
 
     const cookieX =
@@ -896,7 +727,6 @@ function gameLoop() {
             y,
             50,
             50,
-
             cookieX,
             cookieY,
             40,
@@ -917,7 +747,7 @@ function gameLoop() {
 
 
         // ====================
-        // EAT PNG
+        // EAT
         // ====================
 
         player.style.backgroundImage =
@@ -942,9 +772,7 @@ function gameLoop() {
     }
 
 
-    requestAnimationFrame(
-        gameLoop
-    );
+    requestAnimationFrame(gameLoop);
 }
 
 
@@ -966,28 +794,16 @@ restartButton.addEventListener(
         gameStarted = true;
 
 
-        // ====================
-        // СБРОС EAT
-        // ====================
-
         clearTimeout(eatTimer);
 
         player.style.backgroundImage =
             'url("normal.png")';
 
 
-        // ====================
-        // МУЗЫКА
-        // ====================
-
         music.currentTime = 0;
 
         music.play().catch(() => {});
 
-
-        // ====================
-        // СЧЁТ
-        // ====================
 
         score = 0;
 
@@ -997,10 +813,6 @@ restartButton.addEventListener(
         gameOverScoreText.textContent =
             "SCORE: 0";
 
-
-        // ====================
-        // УДАЛЯЕМ ТЕЛО
-        // ====================
 
         for (
             let i = 0;
@@ -1017,10 +829,6 @@ restartButton.addEventListener(
         positionHistory.length = 0;
 
 
-        // ====================
-        // ИГРОК
-        // ====================
-
         player.style.left =
             x + "px";
 
@@ -1028,17 +836,9 @@ restartButton.addEventListener(
             y + "px";
 
 
-        // ====================
-        // GAME OVER
-        // ====================
-
         gameOverPanel.style.display =
             "none";
 
-
-        // ====================
-        // ПЕЧЕНЬКА
-        // ====================
 
         cookie.remove();
 
@@ -1049,7 +849,7 @@ restartButton.addEventListener(
 
 
 // ====================
-// СТАРТ
+// НАЧАЛЬНАЯ ПОЗИЦИЯ
 // ====================
 
 player.style.left =
@@ -1058,6 +858,10 @@ player.style.left =
 player.style.top =
     y + "px";
 
+
+// ====================
+// ЗАПУСК ЦИКЛА
+// ====================
 
 gameLoop();
 ```
